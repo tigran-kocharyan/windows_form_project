@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overwatch_WinForm", "Overwatch_WinForm\Overwatch_WinForm.csproj", "{4C1E5FCD-29C8-400B-BA8C-FA67E08AD03A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{3F0FC698-6A5D-4827-94C9-CFB67946A129}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C1E5FCD-29C8-400B-BA8C-FA67E08AD03A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1E5FCD-29C8-400B-BA8C-FA67E08AD03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1E5FCD-29C8-400B-BA8C-FA67E08AD03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1E5FCD-29C8-400B-BA8C-FA67E08AD03A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F0FC698-6A5D-4827-94C9-CFB67946A129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F0FC698-6A5D-4827-94C9-CFB67946A129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F0FC698-6A5D-4827-94C9-CFB67946A129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F0FC698-6A5D-4827-94C9-CFB67946A129}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B6F9A94-710D-491F-82DE-FBBE8E109D12}
+	EndGlobalSection
+EndGlobal
