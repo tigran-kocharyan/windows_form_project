@@ -104,9 +104,9 @@ namespace Overwatch_WinForm
         {
             try
             {
-                if (textBox1.Text != String.Empty)
+                if (textBox2.Text != String.Empty)
                 {
-                    string text = textBox1.Text;
+                    string text = textBox2.Text;
                     if (text.Contains('-'))
                     {
 
@@ -139,9 +139,9 @@ namespace Overwatch_WinForm
         {
             try
             {
-                if (textBox1.Text != String.Empty)
+                if (textBox3.Text != String.Empty)
                 {
-                    string text = textBox1.Text;
+                    string text = textBox3.Text;
                     if (text.Contains('-'))
                     {
 
