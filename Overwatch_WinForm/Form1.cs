@@ -13,10 +13,20 @@ namespace Overwatch_WinForm
 {
     public partial class Form1 : Form
     {
-
+        /// <summary>
+        /// Констркутор формы.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
+            MakeInvisible();
+        }
+
+        /// <summary>
+        ///  Делает кнопки и тексты невидимыми пользователю.
+        /// </summary>
+        private void MakeInvisible()
+        {
             textBox1.Visible = false;
             textBox2.Visible = false;
             textBox3.Visible = false;
@@ -25,8 +35,8 @@ namespace Overwatch_WinForm
             label3.Visible = false;
             label4.Visible = false;
             button3.Visible = false;
-
         }
+
         /// <summary>
         /// Делает кнопки и тексты видимыми пользователю.
         /// </summary>
@@ -67,18 +77,20 @@ namespace Overwatch_WinForm
             //button1.Visible = false;
         }
 
-        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            label4.Text = $"Hero";
-        }
-
+        /// <summary>
+        /// Метод для обработки события изменения ячейки. Избавляет пользователя от проблем 
+        /// с некорректными данными.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (e.ColumnIndex > 0)
                 {
-                    if (this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "infinity")
+                    if (this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() 
+                        == "infinity")
                     {
                         this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value =
                             double.PositiveInfinity.ToString();
@@ -88,7 +100,6 @@ namespace Overwatch_WinForm
                         double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
                             Parser.changeLocale);
                     }
-
                 }
             }
             catch (Exception)
@@ -100,7 +111,11 @@ namespace Overwatch_WinForm
             }
         }
 
-
+        /// <summary>
+        /// Кнопка для считывания CSV-файла и обновления таблицы.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
 
@@ -134,12 +149,23 @@ namespace Overwatch_WinForm
                 }
             }
         }
+
+        /// <summary>
+        /// Кнопка-памятка по фильтрации.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button2_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Введите в TextBox значение параметра в разумных границах в виде X-Y, " +
                 "либо введите минимальное желаемое значение этого параметра.");
         }
 
+        /// <summary>
+        /// Кнопка для реализации фильтрации.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button3_Click(object sender, EventArgs e)
         {
             Renew();
@@ -271,6 +297,22 @@ namespace Overwatch_WinForm
                 textBox2.Text = "";
                 textBox3.Text = "";
             }
+        }
+
+        /// <summary>
+        /// Выводит информацию о персонаже в Label_4.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var row = this.dataGridView1.Rows[e.RowIndex];
+            label4.Text = $"{row.Cells[0].Value.ToString()}\n" +
+                $"DPS: {row.Cells[1].Value.ToString()}\n" +
+                $"Headshot DPS: {row.Cells[2].Value.ToString()}\n" +
+                $"Single Shot DPS: {row.Cells[3].Value.ToString()}\n" +
+                $"Life: {row.Cells[4].Value.ToString()}\n" +
+                $"Reload: {row.Cells[5].Value.ToString()}";
         }
     }
 }
