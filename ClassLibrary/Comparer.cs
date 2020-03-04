@@ -21,7 +21,7 @@ namespace ClassLibrary
             do
             {
                 Console.WriteLine(message);
-            } while (!int.TryParse(Console.ReadLine(), out number) || number < left || number > right);
+            } while (!int.TryParse(Console.ReadLine(), System.Globalization.NumberStyles.Any, Parser.changeLocale, out number) || number < left || number > right);
             return number;
         }
 
@@ -32,7 +32,7 @@ namespace ClassLibrary
         /// <param name="boxText"></param>
         static public bool Compare(double rowNumber, string boxText)
         {
-            double boxNumber = double.Parse(boxText);
+            double boxNumber = double.Parse(boxText, Parser.changeLocale);
 
             return boxNumber <= rowNumber;
         }
@@ -46,7 +46,7 @@ namespace ClassLibrary
         /// <returns></returns>
         static public bool Compare(double rowNumberMin, double rowNumberMax, string boxText)
         {
-            double boxNumber = double.Parse(boxText);
+            double boxNumber = double.Parse(boxText, Parser.changeLocale);
 
             return boxNumber <= rowNumberMax && boxNumber >= rowNumberMin;
         }
