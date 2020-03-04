@@ -34,14 +34,7 @@ namespace ClassLibrary
         {
             double boxNumber = double.Parse(boxText);
 
-            if (boxNumber <= rowNumber)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return boxNumber <= rowNumber;
         }
 
         /// <summary>
@@ -55,14 +48,7 @@ namespace ClassLibrary
         {
             double boxNumber = double.Parse(boxText);
 
-            if (boxNumber <= rowNumberMax && boxNumber >= rowNumberMin)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return boxNumber <= rowNumberMax && boxNumber >= rowNumberMin;
         }
     }
 }
