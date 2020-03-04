@@ -44,9 +44,25 @@ namespace ClassLibrary
             }
         }
 
+        /// <summary>
+        /// Перегрузка метода Compare для сравнения чисел с диапозоне min-max.
+        /// </summary>
+        /// <param name="rowNumberMin"></param>
+        /// <param name="rowNumberMax"></param>
+        /// <param name="boxText"></param>
+        /// <returns></returns>
         static public bool Compare(double rowNumberMin, double rowNumberMax, string boxText)
         {
-            return true;
+            double boxNumber = double.Parse(boxText);
+
+            if (boxNumber <= rowNumberMax && boxNumber >= rowNumberMin)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

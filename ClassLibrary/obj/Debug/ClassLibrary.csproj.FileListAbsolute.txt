@@ -1,6 +1,6 @@
-C:\Users\Tigran_K\source\repos\Overwatch_WinForm\ClassLibrary\bin\Debug\ClassLibrary.dll
-C:\Users\Tigran_K\source\repos\Overwatch_WinForm\ClassLibrary\bin\Debug\ClassLibrary.pdb
-C:\Users\Tigran_K\source\repos\Overwatch_WinForm\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
-C:\Users\Tigran_K\source\repos\Overwatch_WinForm\ClassLibrary\obj\Debug\ClassLibrary.dll
-C:\Users\Tigran_K\source\repos\Overwatch_WinForm\ClassLibrary\obj\Debug\ClassLibrary.pdb
-C:\Users\Tigran_K\source\repos\Overwatch_WinForm\ClassLibrary\obj\Debug\ClassLibrary.csprojAssemblyReference.cache
+C:\Users\koch\Desktop\windows_form_project\ClassLibrary\bin\Debug\ClassLibrary.dll
+C:\Users\koch\Desktop\windows_form_project\ClassLibrary\bin\Debug\ClassLibrary.pdb
+C:\Users\koch\Desktop\windows_form_project\ClassLibrary\obj\Debug\ClassLibrary.csprojAssemblyReference.cache
+C:\Users\koch\Desktop\windows_form_project\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\koch\Desktop\windows_form_project\ClassLibrary\obj\Debug\ClassLibrary.dll
+C:\Users\koch\Desktop\windows_form_project\ClassLibrary\obj\Debug\ClassLibrary.pdb
