@@ -23,8 +23,21 @@ namespace Overwatch_WinForm
             label1.Visible = false;
             label2.Visible = false;
             label3.Visible = false;
+            label4.Visible = false;
+            button3.Visible = false;
+
         }
 
+        private void Renew()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
+            {
+                this.dataGridView1.Rows[i].Visible = true;
+            }
+        }
         private void Change()
         {
             button1.Text = "Обновить";
@@ -38,15 +51,18 @@ namespace Overwatch_WinForm
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            textBox1.Visible = true;
-            textBox2.Visible = true;
-            textBox3.Visible = true;
-            label1.Visible = true;
-            label2.Visible = true;
-            label3.Visible = true;
+            
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             if (button1.Text == "Считать CSV Ваших Персонажей")
             {
+                textBox1.Visible = true;
+                textBox2.Visible = true;
+                textBox3.Visible = true;
+                label1.Visible = true;
+                label2.Visible = true;
+                label3.Visible = true;
+                label4.Visible = true;
+                button3.Visible = true;
                 Change();
                 string[][] stats = Parser.ReadCSV("../../Overwatch.csv");
                 for (int i = 0; i < stats[0].Length; i++)
@@ -64,6 +80,7 @@ namespace Overwatch_WinForm
             }
             else
             {
+                MessageBox.Show("I am here!");
                 textBox1.Text = "";
                 textBox2.Text = "";
                 textBox3.Text = "";
@@ -85,60 +102,77 @@ namespace Overwatch_WinForm
                 "либо введите минимальное желаемое значение этого параметра.");
         }
 
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox1.Text != String.Empty)
-            {
-
-                string text = textBox1.Text.Trim();
-                if (text.Contains("-"))
-                {
-                    string[] splitted = text.Split('-');
-                    double minNumber = double.Parse(splitted[0].ToString(),
-                        Parser.changeLocale);
-                    double maxNumber = double.Parse(splitted[1].ToString(),
-                        Parser.changeLocale);
-
-                    for (var i = 0; i < this.dataGridView1.Rows.Count; i++)
-                    {
-                        if (this.dataGridView1.Rows[i].Visible == true)
-                        {
-                            string cellValue = this.dataGridView1.Rows[i].
-                                Cells[dataGridView1.Columns["Life"].Index].Value.ToString();
-                            this.dataGridView1.Rows[i].Selected = false;
-                            this.dataGridView1.Rows[i].Visible = Comparer.Compare(minNumber, maxNumber, text.Trim());
-                        }
-                    }
-                }
-
-                else
-                {
-                    for (var i = 0; i < this.dataGridView1.Rows.Count; i++)
-                    {
-                        if (this.dataGridView1.Rows[i].Visible == true)
-                        {
-                            this.dataGridView1.Rows[i].Visible = true;
-                            string cellValue = this.dataGridView1.Rows[i].
-                                Cells[dataGridView1.Columns["Damage per second "].Index].Value.ToString();
-                            this.dataGridView1.Rows[i].Selected = false;
-                            var temp = double.Parse(cellValue, Parser.changeLocale);
-                            this.dataGridView1.Rows[i].Visible = Comparer.Compare(temp, text.Trim());
-                        }
-                    }
-                }
-
-                //catch (Exception ex)
-                //{
-                //    Button1_Click(null, null);
-                //    MessageBox.Show($"Вы ввели неправильные данные!\n{ex.Message}");
-                //}
-            }
-        }
-
-        private void TextBox2_TextChanged(object sender, EventArgs e)
+        private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
+                if (e.ColumnIndex > 0)
+                {
+                    if (this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "infinity")
+                    {
+                        this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value =
+                            double.PositiveInfinity.ToString();
+                    }
+                    else
+                    {
+                        double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
+                            Parser.changeLocale);
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0;
+                MessageBox.Show("Вы ввели недопустимое значение в ячейку с числом! " +
+                    "Теперь там будет стоять 0! Вводите, пожалуйста, либо int, либо double.\n" +
+                    "Не думаю, что персонаж умеет стрелять строками :)");
+            }
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            Renew();
+            try
+            {
+                if (textBox1.Text != String.Empty)
+                {
+                    string text = textBox1.Text.Trim();
+                    if (text.Contains("-"))
+                    {
+                        string[] splitted = text.Split('-');
+                        double minNumber = double.Parse(splitted[0].ToString(),
+                            Parser.changeLocale);
+                        double maxNumber = double.Parse(splitted[1].ToString(),
+                            Parser.changeLocale);
+
+                        for (var i = 0; i < this.dataGridView1.Rows.Count; i++)
+                        {
+                            if (this.dataGridView1.Rows[i].Visible == true)
+                            {
+                                string cellValue = this.dataGridView1.Rows[i].
+                                    Cells[dataGridView1.Columns["Life"].Index].Value.ToString();
+                                this.dataGridView1.Rows[i].Selected = false;
+                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(minNumber, maxNumber, text.Trim());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (var i = 0; i < this.dataGridView1.Rows.Count; i++)
+                        {
+                            if (this.dataGridView1.Rows[i].Visible == true)
+                            {
+                                this.dataGridView1.Rows[i].Visible = true;
+                                string cellValue = this.dataGridView1.Rows[i].
+                                    Cells[dataGridView1.Columns["Damage per second "].Index].Value.ToString();
+                                this.dataGridView1.Rows[i].Selected = false;
+                                var temp = double.Parse(cellValue, Parser.changeLocale);
+                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(temp, text.Trim());
+                            }
+                        }
+                    }
+                }
                 if (textBox2.Text != String.Empty)
                 {
                     string text = textBox2.Text.Trim();
@@ -177,19 +211,6 @@ namespace Overwatch_WinForm
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Button1_Click(null, null);
-                MessageBox.Show($"Вы ввели неправильные данные!\n{ex.Message}");
-            }
-
-        }
-
-        private void TextBox3_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
                 if (textBox3.Text != String.Empty)
                 {
                     string text = textBox3.Text.Trim();
@@ -231,43 +252,16 @@ namespace Overwatch_WinForm
             }
             catch (Exception ex)
             {
+
                 Button1_Click(null, null);
                 MessageBox.Show($"Вы ввели неправильные данные!\n{ex.Message}");
             }
-
-        }
-
-        private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            try
+            finally
             {
-                if (e.ColumnIndex > 0)
-                {
-                    if (this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "infinity")
-                    {
-                        this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value =
-                            double.PositiveInfinity.ToString();
-                    }
-                    else
-                    {
-                        double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
-                            Parser.changeLocale);
-                    }
-
-                }
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
             }
-            catch (Exception)
-            {
-                this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0;
-                MessageBox.Show("Вы ввели недопустимое значение в ячейку с числом! " +
-                    "Теперь там будет стоять 0! Вводите, пожалуйста, либо int, либо double.\n" +
-                    "Не думаю, что персонаж умеет стрелять строками :)");
-            }
-        }
-
-        private void Button3_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

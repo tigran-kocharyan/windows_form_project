@@ -11,3 +11,16 @@ C:\Users\koch\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch
 C:\Users\koch\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.csproj.CopyComplete
 C:\Users\koch\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.exe
 C:\Users\koch\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.pdb
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\bin\Debug\Overwatch_WinForm.exe.config
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\bin\Debug\Overwatch_WinForm.exe
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\bin\Debug\Overwatch_WinForm.pdb
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\bin\Debug\ClassLibrary.dll
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\bin\Debug\ClassLibrary.pdb
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.csprojAssemblyReference.cache
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.Form1.resources
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.Properties.Resources.resources
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.csproj.GenerateResource.cache
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.csproj.CoreCompileInputs.cache
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.csproj.CopyComplete
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.exe
+C:\Users\Tigran_K\Desktop\windows_form_project\Overwatch_WinForm\obj\Debug\Overwatch_WinForm.pdb
