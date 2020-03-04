@@ -57,6 +57,9 @@ namespace Overwatch_WinForm
         /// </summary>
         private void Renew()
         {
+            label5.Text = String.Empty;
+            label6.Text = String.Empty;
+            label7.Text = String.Empty;
             for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
             {
                 this.dataGridView1.Rows[i].Visible = true;
@@ -69,12 +72,12 @@ namespace Overwatch_WinForm
         private void Change()
         {
             button1.Text = "Обновить";
-            /*MessageBox.Show($"Здравствуй, Игрок! Вот, что тебе нужно сделать:\n\n" +
+            MessageBox.Show($"Здравствуй, Игрок! Вот, что тебе нужно сделать:\n\n" +
                 $"В появившейся таблице кликни по номеру строки слева, чтобы получить информацию о выбранном." +
                 $"\n\n{new String('-', 92)}\nПамятка по работе фильтра:\n\n" +
                 "Ты можешь фильтровать по нескольким параметрам одновременно, но не забывай тогда обновлять таблицу кнопкой " +
-                "'Обновить'.\n\nНе советую шутить с этой игрушкой дьявола...");*/
-            //button1.Visible = false;
+                "'Обновить'.\n\nНе советую шутить с этой игрушкой дьявола...");
+            Button2_Click(null, null);
         }
 
         /// <summary>
@@ -177,9 +180,9 @@ namespace Overwatch_WinForm
                 if (textBox1.Text != String.Empty)
                 {
                     string text = textBox1.Text.Trim();
+                    label5.Text = text;
                     if (text.Contains("-"))
-                    {
-                        
+                    {                   
                         string[] splitted = text.Split('-');
                         double minNumber = double.Parse(splitted[0].ToString(),
                             Parser.changeLocale);
@@ -208,7 +211,7 @@ namespace Overwatch_WinForm
                                     Cells[dataGridView1.Columns["Damage per second "].Index].Value.ToString();
                                 this.dataGridView1.Rows[i].Selected = false;
                                 var temp = double.Parse(cellValue, Parser.changeLocale);
-                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(temp, text.Trim());
+                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(temp, text);
                             }
                         }
                     }
@@ -216,6 +219,7 @@ namespace Overwatch_WinForm
                 if (textBox2.Text != String.Empty)
                 {
                     string text = textBox2.Text.Trim();
+                    label6.Text = text;
                     if (text.Contains('-'))
                     {
                         string[] splitted = text.Split('-');
@@ -246,7 +250,7 @@ namespace Overwatch_WinForm
                                     Cells[dataGridView1.Columns["Life"].Index].Value.ToString();
                                 this.dataGridView1.Rows[i].Selected = false;
                                 var temp = double.Parse(cellValue, Parser.changeLocale);
-                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(temp, text.Trim());
+                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(temp, text);
                             }
                         }
                     }
@@ -254,6 +258,7 @@ namespace Overwatch_WinForm
                 if (textBox3.Text != String.Empty)
                 {
                     string text = textBox3.Text.Trim();
+                    label7.Text = text;
                     if (text.Contains('-'))
                     {
                         string[] splitted = text.Split('-');
@@ -284,17 +289,17 @@ namespace Overwatch_WinForm
                                     Cells[dataGridView1.Columns["Headshot DPS  "].Index].Value.ToString();
                                 this.dataGridView1.Rows[i].Selected = false;
                                 var temp = double.Parse(cellValue, Parser.changeLocale);
-                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(temp, text.Trim());
+                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(temp, text);
                             }
                         }
                     }
                 }
             }
-            //catch (Exception ex)
-            //{
-            //    Button1_Click(null, null);
-            //    MessageBox.Show($"Вы ввели неправильные данные!\n{ex.Message}");
-            //}
+            catch (Exception ex)
+            {
+                Button1_Click(null, null);
+                MessageBox.Show($"Вы ввели неправильные данные!\n{ex.Message}");
+            }
             finally
             {
                 textBox1.Text = "";
