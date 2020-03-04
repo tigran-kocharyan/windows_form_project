@@ -187,9 +187,9 @@ namespace Overwatch_WinForm
                             if (this.dataGridView1.Rows[i].Visible == true)
                             {
                                 string cellValue = this.dataGridView1.Rows[i].
-                                    Cells[dataGridView1.Columns["Life"].Index].Value.ToString();
+                                    Cells[dataGridView1.Columns["Damage per second "].Index].Value.ToString();
                                 this.dataGridView1.Rows[i].Selected = false;
-                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(minNumber, maxNumber, text.Trim());
+                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(minNumber, maxNumber, cellValue);
                             }
                         }
                     }
@@ -227,7 +227,7 @@ namespace Overwatch_WinForm
                                 string cellValue = this.dataGridView1.Rows[i].
                                     Cells[dataGridView1.Columns["Life"].Index].Value.ToString();
                                 this.dataGridView1.Rows[i].Selected = false;
-                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(minNumber, maxNumber, text.Trim());
+                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(minNumber, maxNumber, cellValue);
                             }
                         }
                     }
@@ -265,7 +265,7 @@ namespace Overwatch_WinForm
                                 string cellValue = this.dataGridView1.Rows[i].
                                     Cells[dataGridView1.Columns["Headshot DPS  "].Index].Value.ToString();
                                 this.dataGridView1.Rows[i].Selected = false;
-                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(minNumber, maxNumber, text.Trim());
+                                this.dataGridView1.Rows[i].Visible = Comparer.Compare(minNumber, maxNumber, cellValue);
                             }
                         }
                     }
@@ -286,11 +286,11 @@ namespace Overwatch_WinForm
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Button1_Click(null, null);
-                MessageBox.Show($"Вы ввели неправильные данные!\n{ex.Message}");
-            }
+            //catch (Exception ex)
+            //{
+            //    Button1_Click(null, null);
+            //    MessageBox.Show($"Вы ввели неправильные данные!\n{ex.Message}");
+            //}
             finally
             {
                 textBox1.Text = "";
