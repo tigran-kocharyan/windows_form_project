@@ -179,6 +179,7 @@ namespace Overwatch_WinForm
                     string text = textBox1.Text.Trim();
                     if (text.Contains("-"))
                     {
+                        
                         string[] splitted = text.Split('-');
                         double minNumber = double.Parse(splitted[0].ToString(),
                             Parser.changeLocale);
@@ -190,7 +191,7 @@ namespace Overwatch_WinForm
                             if (this.dataGridView1.Rows[i].Visible == true)
                             {
                                 string cellValue = this.dataGridView1.Rows[i].
-                                    Cells[dataGridView1.Columns["Life"].Index].Value.ToString();
+                                    Cells[dataGridView1.Columns["Damage per second "].Index].Value.ToString();
                                 this.dataGridView1.Rows[i].Selected = false;
                                 this.dataGridView1.Rows[i].Visible = Comparer.Compare(minNumber, maxNumber, text.Trim());
                             }
@@ -310,7 +311,7 @@ namespace Overwatch_WinForm
         private void DataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var row = this.dataGridView1.Rows[e.RowIndex];
-            label4.Text = $"{row.Cells[0].Value.ToString()}\n" +
+            label4.Text = $"Вы выбрали персонажа:\n\n{row.Cells[0].Value.ToString()}\n" +
                 $"DPS: {row.Cells[1].Value.ToString()}\n" +
                 $"Headshot DPS: {row.Cells[2].Value.ToString()}\n" +
                 $"Single Shot DPS: {row.Cells[3].Value.ToString()}\n" +
