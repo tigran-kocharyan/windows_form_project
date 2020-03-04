@@ -27,17 +27,35 @@ namespace Overwatch_WinForm
             button3.Visible = false;
 
         }
-
+        /// <summary>
+        /// Делает кнопки и тексты видимыми пользователю.
+        /// </summary>
+        private void MakeVisible()
+        {
+            textBox1.Visible = true;
+            textBox2.Visible = true;
+            textBox3.Visible = true;
+            label1.Visible = true;
+            label2.Visible = true;
+            label3.Visible = true;
+            label4.Visible = true;
+            button3.Visible = true;
+        }
+        
+        /// <summary>
+        /// Делает все ячейки видимыми после фильтрации.
+        /// </summary>
         private void Renew()
         {
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
             for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
             {
                 this.dataGridView1.Rows[i].Visible = true;
             }
         }
+
+        /// <summary>
+        /// Метод обновляет значение кнопки считывания для последующего обновления таблицы.
+        /// </summary>
         private void Change()
         {
             button1.Text = "Обновить";
@@ -49,57 +67,9 @@ namespace Overwatch_WinForm
             //button1.Visible = false;
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            
-            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            if (button1.Text == "Считать CSV Ваших Персонажей")
-            {
-                textBox1.Visible = true;
-                textBox2.Visible = true;
-                textBox3.Visible = true;
-                label1.Visible = true;
-                label2.Visible = true;
-                label3.Visible = true;
-                label4.Visible = true;
-                button3.Visible = true;
-                Change();
-                string[][] stats = Parser.ReadCSV("../../Overwatch.csv");
-                for (int i = 0; i < stats[0].Length; i++)
-                {
-                    this.dataGridView1.Columns.Add(stats[0][i], stats[0][i]);
-                }
-                for (int i = 1; i < stats.Length; i++)
-                {
-                    this.dataGridView1.Rows.Add(stats[i]);
-                }
-                for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
-                {
-                    this.dataGridView1.Rows[i].HeaderCell.Value = $"{i + 1}";
-                }
-            }
-            else
-            {
-                MessageBox.Show("I am here!");
-                textBox1.Text = "";
-                textBox2.Text = "";
-                textBox3.Text = "";
-                for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
-                {
-                    this.dataGridView1.Rows[i].Visible = true;
-                }
-            }
-        }
-
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             label4.Text = $"Hero";
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Введите значение параметра в разумных границах в виде X-Y, " +
-                "либо введите минимальное желаемое значение этого параметра.");
         }
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -128,6 +98,46 @@ namespace Overwatch_WinForm
                     "Теперь там будет стоять 0! Вводите, пожалуйста, либо int, либо double.\n" +
                     "Не думаю, что персонаж умеет стрелять строками :)");
             }
+        }
+
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            if (button1.Text == "Считать CSV Ваших Персонажей")
+            {
+                MakeVisible();
+                Change();
+                string[][] stats = Parser.ReadCSV("../../Overwatch.csv");
+                for (int i = 0; i < stats[0].Length; i++)
+                {
+                    this.dataGridView1.Columns.Add(stats[0][i], stats[0][i]);
+                }
+                for (int i = 1; i < stats.Length; i++)
+                {
+                    this.dataGridView1.Rows.Add(stats[i]);
+                }
+                for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
+                {
+                    this.dataGridView1.Rows[i].HeaderCell.Value = $"{i + 1}";
+                }
+            }
+            else
+            {
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
+                {
+                    this.dataGridView1.Rows[i].Visible = true;
+                }
+            }
+        }
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Введите в TextBox значение параметра в разумных границах в виде X-Y, " +
+                "либо введите минимальное желаемое значение этого параметра.");
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -252,7 +262,6 @@ namespace Overwatch_WinForm
             }
             catch (Exception ex)
             {
-
                 Button1_Click(null, null);
                 MessageBox.Show($"Вы ввели неправильные данные!\n{ex.Message}");
             }
