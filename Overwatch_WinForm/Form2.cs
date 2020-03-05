@@ -26,7 +26,7 @@ namespace Overwatch_WinForm
                 $"Life: {hero.Life}\n" +
                 $"Reload: {hero.Reload}";
 
-            label2.Text = $"Вы выбрали персонажа:\n\n{enemy.Name}\n" +
+            label2.Text = $"неВы выбрали персонажа:\n\n{enemy.Name}\n" +
                 $"DPS: {enemy.DPS}\n" +
                 $"Headshot DPS: {enemy.HDPS}\n" +
                 $"Single Shot DPS: {enemy.SingleDPS}\n" +
