@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClassLibrary;
 
 namespace Overwatch_WinForm
 {
@@ -14,9 +15,22 @@ namespace Overwatch_WinForm
     {
         private Form1 oldForm;
 
-        public Form2(Form1 f)
+        public Form2(Form1 oldForm, Unit hero, Unit enemy)
         {
-            oldForm = f;
+            this.oldForm = oldForm;
+            label1.Text = $"Вы выбрали персонажа:\n\n{enemy.Name}\n" +
+                $"DPS: {enemy.DPS}\n" +
+                $"Headshot DPS: {enemy.HDPS}\n" +
+                $"Single Shot DPS: {enemy.SingleDPS}\n" +
+                $"Life: {enemy.Life}\n" +
+                $"Reload: {enemy.Reload}";
+
+            label2.Text = $"Вы выбрали персонажа:\n\n{enemy.Name}\n" +
+                $"DPS: {enemy.DPS}\n" +
+                $"Headshot DPS: {enemy.HDPS}\n" +
+                $"Single Shot DPS: {enemy.SingleDPS}\n" +
+                $"Life: {enemy.Life}\n" +
+                $"Reload: {enemy.Reload}";
             InitializeComponent();
         }
 

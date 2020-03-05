@@ -23,6 +23,16 @@ namespace Overwatch_WinForm
         }
 
         /// <summary>
+        /// Объект Random для генерации случайного противника.
+        /// </summary>
+        private static readonly Random random = new Random();
+
+        /// <summary>
+        /// Поле для хранения выбранной ячейки.
+        /// </summary>
+        private static int rowIndex;
+
+        /// <summary>
         ///  Делает кнопки и тексты невидимыми пользователю.
         /// </summary>
         private void MakeInvisible()
@@ -318,6 +328,7 @@ namespace Overwatch_WinForm
         private void DataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var row = this.dataGridView1.Rows[e.RowIndex];
+            rowIndex = e.RowIndex;
             label4.Text = $"Вы выбрали персонажа:\n\n{row.Cells[0].Value.ToString()}\n" +
                 $"DPS: {row.Cells[1].Value.ToString()}\n" +
                 $"Headshot DPS: {row.Cells[2].Value.ToString()}\n" +
@@ -343,9 +354,31 @@ namespace Overwatch_WinForm
         /// <param name="e"></param>
         private void Button4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(label4.Text.ToString());
-            new Form2(this).Show();
-            this.Hide();
+            try
+            {
+                MessageBox.Show(label4.Text.ToString());
+                int randomIndex;
+                var rowHero = this.dataGridView1.Rows[rowIndex];
+                Unit hero = new Unit(rowHero.Cells[0].Value.ToString(), double.Parse(rowHero.Cells[1].Value.ToString()),
+                    double.Parse(rowHero.Cells[2].Value.ToString()), double.Parse(rowHero.Cells[3].Value.ToString()),
+                    double.Parse(rowHero.Cells[4].Value.ToString()), double.Parse(rowHero.Cells[5].Value.ToString()));
+                do
+                {
+                    randomIndex = random.Next(1, 59);
+                } while (randomIndex!=rowIndex);
+
+                var rowEnemy = this.dataGridView1.Rows[randomIndex];
+                Unit enemy = new Unit(rowEnemy.Cells[0].Value.ToString(), double.Parse(rowEnemy.Cells[1].Value.ToString()),
+                    double.Parse(rowEnemy.Cells[2].Value.ToString()), double.Parse(rowEnemy.Cells[3].Value.ToString()),
+                    double.Parse(rowEnemy.Cells[4].Value.ToString()), double.Parse(rowEnemy.Cells[5].Value.ToString()));
+
+                new Form2(this, hero, enemy).Show();
+                this.Hide();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Что-то пошло не так!");
+            }
         }
     }
 }
