@@ -344,7 +344,7 @@ namespace Overwatch_WinForm
         private void Button4_Click(object sender, EventArgs e)
         {
             MessageBox.Show(label4.Text.ToString());
-            new Form2().Show();
+            new Form2(this).Show();
             this.Hide();
         }
     }

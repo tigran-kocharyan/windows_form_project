@@ -12,14 +12,17 @@ namespace Overwatch_WinForm
 {
     public partial class Form2 : Form
     {
-        public Form2()
+        private Form1 oldForm;
+
+        public Form2(Form1 f)
         {
+            oldForm = f;
             InitializeComponent();
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            new Form1().Show();
+            oldForm.Show();
         }
     }
 }
