@@ -362,9 +362,10 @@ namespace Overwatch_WinForm
                 Unit hero = new Unit(rowHero.Cells[0].Value.ToString(), double.Parse(rowHero.Cells[1].Value.ToString()),
                     double.Parse(rowHero.Cells[2].Value.ToString()), double.Parse(rowHero.Cells[3].Value.ToString()),
                     double.Parse(rowHero.Cells[4].Value.ToString()), double.Parse(rowHero.Cells[5].Value.ToString()));
+
                 do
                 {
-                    randomIndex = random.Next(1, 58);
+                    randomIndex = random.Next(0, 58);
                 } while (randomIndex == rowIndex);
 
                 var rowEnemy = this.dataGridView1.Rows[randomIndex];
