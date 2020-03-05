@@ -34,6 +34,12 @@ namespace Overwatch_WinForm
                 $"Reload: {enemy.Reload}";
         }
 
+        /// <summary>
+        /// При закрытии формы с боем, будет открываться первоначальная форма с выбором персонажа.
+        /// Реализация повтора решения.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             oldForm.Show();
