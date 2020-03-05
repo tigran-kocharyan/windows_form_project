@@ -35,6 +35,8 @@ namespace Overwatch_WinForm
             label3.Visible = false;
             label4.Visible = false;
             button3.Visible = false;
+            button4.Visible = false;
+            
         }
 
         /// <summary>
@@ -72,12 +74,12 @@ namespace Overwatch_WinForm
         private void Change()
         {
             button1.Text = "Обновить";
-            MessageBox.Show($"Здравствуй, Игрок! Вот, что тебе нужно сделать:\n\n" +
+            /*MessageBox.Show($"Здравствуй, Игрок! Вот, что тебе нужно сделать:\n\n" +
                 $"В появившейся таблице кликни по номеру строки слева, чтобы получить информацию о выбранном." +
                 $"\n\n{new String('-', 92)}\nПамятка по работе фильтра:\n\n" +
                 "Ты можешь фильтровать по нескольким параметрам одновременно, но не забывай тогда обновлять таблицу кнопкой " +
                 "'Обновить'.\n\nНе советую шутить с этой игрушкой дьявола...");
-            Button2_Click(null, null);
+            Button2_Click(null, null);*/
         }
 
         /// <summary>
@@ -123,7 +125,7 @@ namespace Overwatch_WinForm
         {
 
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            if (button1.Text == "Считать CSV Ваших Персонажей")
+            if (button1.Text == "Считать CSV")
             {
                 MakeVisible();
                 Change();
@@ -322,6 +324,28 @@ namespace Overwatch_WinForm
                 $"Single Shot DPS: {row.Cells[3].Value.ToString()}\n" +
                 $"Life: {row.Cells[4].Value.ToString()}\n" +
                 $"Reload: {row.Cells[5].Value.ToString()}";
+        }
+
+        /// <summary>
+        /// Событие, которое показывает кнопку начала игры, как только игрок выбрал персонажа.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Label4_TextChanged(object sender, EventArgs e)
+        {
+            button4.Visible = true;
+        }
+
+        /// <summary>
+        /// Метод, необходимый для перехода к процессу игры с выбранным персонажем.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(label4.Text.ToString());
+            new Form2().Show();
+            this.Hide();
         }
     }
 }

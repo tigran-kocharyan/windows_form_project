@@ -42,6 +42,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(163, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Считать CSV Ваших Персонажей";
+            this.button1.Text = "Считать CSV";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
@@ -136,6 +137,7 @@
             this.label4.Size = new System.Drawing.Size(115, 13);
             this.label4.TabIndex = 9;
             this.label4.Text = "Информация о Герое";
+            this.label4.TextChanged += new System.EventHandler(this.Label4_TextChanged);
             // 
             // button3
             // 
@@ -171,11 +173,22 @@
             this.label7.Size = new System.Drawing.Size(0, 13);
             this.label7.TabIndex = 13;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(12, 373);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(163, 36);
+            this.button4.TabIndex = 14;
+            this.button4.Text = "Начать Игру За Этого Персонажа";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -214,6 +227,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button4;
     }
 }
 
