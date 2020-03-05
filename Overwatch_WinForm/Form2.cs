@@ -19,14 +19,14 @@ namespace Overwatch_WinForm
         {
             this.oldForm = oldForm;
             InitializeComponent();
-            label1.Text = $"Вы выбрали персонажа:\n\n{enemy.Name}\n" +
-                $"DPS: {enemy.DPS}\n" +
-                $"Headshot DPS: {enemy.HDPS}\n" +
-                $"Single Shot DPS: {enemy.SingleDPS}\n" +
-                $"Life: {enemy.Life}\n" +
-                $"Reload: {enemy.Reload}";
+            label1.Text = $"Вы выбрали персонажа:\n\n{hero.Name}\n" +
+                $"DPS: {hero.DPS}\n" +
+                $"Headshot DPS: {hero.HDPS}\n" +
+                $"Single Shot DPS: {hero.SingleDPS}\n" +
+                $"Life: {hero.Life}\n" +
+                $"Reload: {hero.Reload}";
 
-            label2.Text = $"Вы выбрали персонажа:\n\n{enemy.Name}\n" +
+            label2.Text = $"неВы выбрали персонажа:\n\n{enemy.Name}\n" +
                 $"DPS: {enemy.DPS}\n" +
                 $"Headshot DPS: {enemy.HDPS}\n" +
                 $"Single Shot DPS: {enemy.SingleDPS}\n" +
