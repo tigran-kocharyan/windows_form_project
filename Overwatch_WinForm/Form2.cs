@@ -18,6 +18,7 @@ namespace Overwatch_WinForm
         public Form2(Form1 oldForm, Unit hero, Unit enemy)
         {
             this.oldForm = oldForm;
+            InitializeComponent();
             label1.Text = $"Вы выбрали персонажа:\n\n{enemy.Name}\n" +
                 $"DPS: {enemy.DPS}\n" +
                 $"Headshot DPS: {enemy.HDPS}\n" +
@@ -31,7 +32,6 @@ namespace Overwatch_WinForm
                 $"Single Shot DPS: {enemy.SingleDPS}\n" +
                 $"Life: {enemy.Life}\n" +
                 $"Reload: {enemy.Reload}";
-            InitializeComponent();
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
