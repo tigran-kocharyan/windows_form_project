@@ -365,7 +365,7 @@ namespace Overwatch_WinForm
                 do
                 {
                     randomIndex = random.Next(1, 59);
-                } while (randomIndex!=rowIndex);
+                } while (randomIndex==rowIndex);
 
                 var rowEnemy = this.dataGridView1.Rows[randomIndex];
                 Unit enemy = new Unit(rowEnemy.Cells[0].Value.ToString(), double.Parse(rowEnemy.Cells[1].Value.ToString()),
