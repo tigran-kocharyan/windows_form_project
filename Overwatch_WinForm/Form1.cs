@@ -46,7 +46,7 @@ namespace Overwatch_WinForm
             label4.Visible = false;
             button3.Visible = false;
             button4.Visible = false;
-            
+
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Overwatch_WinForm
             label4.Visible = true;
             button3.Visible = true;
         }
-        
+
         /// <summary>
         /// Делает все ячейки видимыми после фильтрации.
         /// </summary>
@@ -104,7 +104,7 @@ namespace Overwatch_WinForm
             {
                 if (e.ColumnIndex > 0)
                 {
-                    if (this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() 
+                    if (this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()
                         == "infinity")
                     {
                         this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value =
@@ -194,7 +194,7 @@ namespace Overwatch_WinForm
                     string text = textBox1.Text.Trim();
                     label5.Text = text;
                     if (text.Contains("-"))
-                    {                   
+                    {
                         string[] splitted = text.Split('-');
                         double minNumber = double.Parse(splitted[0].ToString(),
                             Parser.changeLocale);
@@ -364,8 +364,8 @@ namespace Overwatch_WinForm
                     double.Parse(rowHero.Cells[4].Value.ToString()), double.Parse(rowHero.Cells[5].Value.ToString()));
                 do
                 {
-                    randomIndex = random.Next(1, 59);
-                } while (randomIndex==rowIndex);
+                    randomIndex = random.Next(1, 58);
+                } while (randomIndex == rowIndex);
 
                 var rowEnemy = this.dataGridView1.Rows[randomIndex];
                 Unit enemy = new Unit(rowEnemy.Cells[0].Value.ToString(), double.Parse(rowEnemy.Cells[1].Value.ToString()),
