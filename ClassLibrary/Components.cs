@@ -8,6 +8,6 @@ namespace ClassLibrary
 {
     public class Components
     {
-        
+
     }
 }
