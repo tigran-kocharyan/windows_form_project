@@ -224,7 +224,7 @@ namespace Overwatch_WinForm
                     bullets -= 1;
                 }
 
-                label3.Text = $"Противник {enemy.Name} использовал прицельную атаку и нанес {damage} урона" +
+                label3.Text = $"Противник {enemy.Name} использовал прицельную атаку и нанес {damage} урона " +
                     $"Вашему персонажу " +
                 $"{hero.Name}, попав {onTarget} раз(a) и из них {onHead} в голову.";
             }
