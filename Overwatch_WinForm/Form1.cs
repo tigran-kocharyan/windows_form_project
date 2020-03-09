@@ -113,8 +113,8 @@ namespace Overwatch_WinForm
                     }
                     else
                     {
-                        double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
-                            Parser.changeLocale);
+                        if(double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
+                            Parser.changeLocale) < 0) throw new ArgumentException();
                     }
                 }
             }
