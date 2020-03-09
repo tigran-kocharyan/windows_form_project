@@ -19,7 +19,9 @@ namespace Overwatch_WinForm
         public Form1()
         {
             InitializeComponent();
+            this.Icon = new Icon("../../../img/logo.ico");
             MakeInvisible();
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
         }
 
         /// <summary>
@@ -46,7 +48,6 @@ namespace Overwatch_WinForm
             label4.Visible = false;
             button3.Visible = false;
             button4.Visible = false;
-
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace Overwatch_WinForm
         /// </summary>
         private void Change()
         {
-            button1.Text = "Обновить";
+            button1.Text = "Сбросить Фильтр";
             /*MessageBox.Show($"Здравствуй, Игрок! Вот, что тебе нужно сделать:\n\n" +
                 $"В появившейся таблице кликни по номеру строки слева, чтобы получить информацию о выбранном." +
                 $"\n\n{new String('-', 92)}\nПамятка по работе фильтра:\n\n" +
@@ -134,11 +135,10 @@ namespace Overwatch_WinForm
         private void Button1_Click(object sender, EventArgs e)
         {
 
-            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             if (button1.Text == "Считать CSV")
             {
-                MakeVisible();
                 Change();
+                MakeVisible();
                 string[][] stats = Parser.ReadCSV("../../Overwatch.csv");
                 for (int i = 0; i < stats[0].Length; i++)
                 {
@@ -155,13 +155,10 @@ namespace Overwatch_WinForm
             }
             else
             {
-                textBox1.Text = "";
-                textBox2.Text = "";
-                textBox3.Text = "";
-                for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
-                {
-                    this.dataGridView1.Rows[i].Visible = true;
-                }
+                textBox1.Text = String.Empty;
+                textBox2.Text = String.Empty;
+                textBox3.Text = String.Empty;
+                Renew();
             }
         }
 
@@ -175,7 +172,7 @@ namespace Overwatch_WinForm
             MessageBox.Show("Для фильтрации:\n\nВведите в TextBox значение параметра" +
                 " в разумных границах в виде X-Y, " +
                 "либо введите минимальное желаемое значение этого параметра.\n\n" +
-                "Для выбора персонажа:\n\n Двойной кликн по номеру" +
+                "Для выбора персонажа:\n\n Двойной клик по номеру " +
                 "в заголовке строки.");
         }
 

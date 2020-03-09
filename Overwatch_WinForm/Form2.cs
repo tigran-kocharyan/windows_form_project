@@ -42,6 +42,7 @@ namespace Overwatch_WinForm
             this.enemy = enemy;
 
             InitializeComponent();
+            this.Icon = new Icon("../../../img/battle.ico");
 
             button3.Visible = false;
 
@@ -121,7 +122,7 @@ namespace Overwatch_WinForm
                 bullets -= 1;
             }
 
-            label3.Text = $"Персонаж {hero.Name} нанес {damage} противнику {enemy.Name}," +
+            label3.Text = $"Персонаж {hero.Name} нанес {damage} противнику {enemy.Name} урона," +
                 $" попав {onTarget} раз(a).";
 
             RefreshEnemyInfo();
@@ -134,6 +135,8 @@ namespace Overwatch_WinForm
 
                 this.Close();
             }
+
+            button3.Focus();
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -168,7 +171,7 @@ namespace Overwatch_WinForm
             }
 
             label3.Text = $"Персонаж {hero.Name} использовал прицельную атаку и нанес " +
-                $"{damage} противнику " +
+                $"{damage} урона противнику " +
                 $"{enemy.Name}, попав {onTarget} раз(a) и из них {onHead} в голову.";
 
             RefreshEnemyInfo();
@@ -181,6 +184,8 @@ namespace Overwatch_WinForm
 
                 this.Close();
             }
+
+            button3.Focus();
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -219,7 +224,7 @@ namespace Overwatch_WinForm
                     bullets -= 1;
                 }
 
-                label3.Text = $"Противник {enemy.Name} использовал прицельную атаку и нанес {damage} " +
+                label3.Text = $"Противник {enemy.Name} использовал прицельную атаку и нанес {damage} урона" +
                     $"Вашему персонажу " +
                 $"{hero.Name}, попав {onTarget} раз(a) и из них {onHead} в голову.";
             }
@@ -239,7 +244,7 @@ namespace Overwatch_WinForm
                     bullets -= 1;
                 }
 
-                label3.Text = $"Противник {enemy.Name} нанес {damage} Вашему персонажу {hero.Name}, " +
+                label3.Text = $"Противник {enemy.Name} нанес {damage} урона Вашему персонажу {hero.Name}, " +
                     $"попав {onTarget} раз(a).";
             }
 
@@ -253,6 +258,8 @@ namespace Overwatch_WinForm
 
                 this.Close();
             }
+
+            button1.Focus();
         }
     }
 }
