@@ -27,7 +27,7 @@ namespace ClassLibrary
         {
             try
             {
-                string[] csvText = File.ReadAllLines(path);
+                string[] csvText = File.ReadAllLines(path).Where(e => e.Trim() != "").ToArray();
                 string[][] answer = new string[csvText.Length][];
                 for (int i = 0; i < csvText.Length; i++)
                 {
