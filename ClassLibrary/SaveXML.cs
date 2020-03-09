@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Xml;
+
+namespace ClassLibrary
+{
+    public class SaveXML
+    {
+        /// <summary>
+        /// Метод для считывания xml информации.
+        /// </summary>
+        /// <returns></returns>
+        public static Unit[] ReadXML()
+        {
+            Unit[] units = new Unit[2];
+
+            return units;
+        }
+
+
+        /// <summary>
+        /// Метод для быстрой записи всей информации в .xml файл -
+        /// Для последующего считывания.
+        /// </summary>
+        /// <param name="hero"></param>
+        /// <param name="enemy"></param>
+        public static void WriteXML(Unit hero, Unit enemy)
+        {
+            string documentation = $"<?xml version=\"1.0\" encoding=\"utf - 8\" ?>";
+
+            string heroInfo =
+                "<Hero>" +
+                $"<Name>{hero.Name.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Name>" +
+                $"<DPS>{hero.DPS.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</DPS>" +
+                $"<HDPS>{hero.HDPS.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</HDPS>" +
+                $"<Life>{hero.Life.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Life>" +
+                $"<SingleDPS>{hero.SingleDPS.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</SingleDPS>" +
+                $"<Reload>{hero.Reload.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Reload>" +
+                $"</Hero>";
+
+            string EnemyInfo =
+                "<Enemy>" +
+                $"<Name>{enemy.Name.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Name>" +
+                $"<DPS>{enemy.DPS.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</DPS>" +
+                $"<HDPS>{enemy.HDPS.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</HDPS>" +
+                $"<Life>{enemy.Life.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Life>" +
+                $"<SingleDPS>{enemy.SingleDPS.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</SingleDPS>" +
+                $"<Reload>{enemy.Reload.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Reload>" +
+                $"</Enemy>";
+
+            string info = documentation + heroInfo + EnemyInfo;
+            File.WriteAllText("../../../saves/autosave.xml", info);
+        }
+    }
+}

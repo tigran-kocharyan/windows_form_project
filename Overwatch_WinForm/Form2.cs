@@ -100,6 +100,11 @@ namespace Overwatch_WinForm
             oldForm.Show();
         }
 
+        /// <summary>
+        /// Метод, для обработки нажатия на кнопку Обычной атаки.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
             button1.Visible = false;
@@ -129,16 +134,21 @@ namespace Overwatch_WinForm
 
             if (enemy.Life <= 0)
             {
-                MessageBox.Show($"Игрок 1 в роли персонажа {hero.Name} победил противника" +
-                    $" {enemy.Name}.\nПоздравляю! " +
+                MessageBox.Show($"Поздравляем! Ваш персонаж {hero.Name} победил противника " +
+                    $"{enemy.Name}.\n" +
                     $"Восстанию машин, которые побеждают наш интеллект и тактику, не бывать!");
 
                 this.Close();
             }
-
+            SaveXML.WriteXML(hero, enemy);
             button3.Focus();
         }
 
+        /// <summary>
+        /// Метод, обрабатывающи прицельную атаку персонажа.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button2_Click(object sender, EventArgs e)
         {
             button1.Visible = false;
@@ -178,16 +188,23 @@ namespace Overwatch_WinForm
 
             if (enemy.Life <= 0)
             {
-                MessageBox.Show($"Игрок 1 в роли персонажа {hero.Name} победил противника " +
-                    $"{enemy.Name}.\nПоздравляю! " +
+                MessageBox.Show($"Поздравляем! Ваш персонаж {hero.Name} победил противника " +
+                    $"{enemy.Name}.\n" +
                     $"Восстанию машин, которые побеждают наш интеллект и тактику, не бывать!");
 
                 this.Close();
             }
 
+            SaveXML.WriteXML(hero, enemy);
             button3.Focus();
         }
 
+        /// <summary>
+        /// Метод, обрабатывающий атаку противника-компьютера, с вероятностью 50/50 выстреливает
+        /// либо прицельной атакой, либо обычной.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button3_Click(object sender, EventArgs e)
         {
             button1.Visible = true;
@@ -259,7 +276,10 @@ namespace Overwatch_WinForm
                 this.Close();
             }
 
+            SaveXML.WriteXML(hero, enemy);
             button1.Focus();
         }
+
+
     }
 }
