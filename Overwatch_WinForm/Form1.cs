@@ -120,7 +120,7 @@ namespace Overwatch_WinForm
             }
             catch (Exception)
             {
-                this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0;
+                this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "0";
                 MessageBox.Show("Вы ввели недопустимое значение в ячейку с числом! " +
                     "Теперь там будет стоять 0! Вводите, пожалуйста, либо int, либо double.\n" +
                     "Не думаю, что персонаж умеет стрелять строками :)");
