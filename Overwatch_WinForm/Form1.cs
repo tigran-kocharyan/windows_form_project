@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using ClassLibrary;
 
 namespace Overwatch_WinForm
@@ -19,7 +20,10 @@ namespace Overwatch_WinForm
         public Form1()
         {
             InitializeComponent();
-            this.Icon = new Icon("../../../img/logo.ico");
+            // Проверяется существование файла, чтобы избежать Exception.
+            if (File.Exists("../../../img/logo.ico"))
+                this.Icon = new Icon("../../../img/logo.ico");
+
             MakeInvisible();
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
         }
@@ -113,8 +117,11 @@ namespace Overwatch_WinForm
                     }
                     else
                     {
-                        if(double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
+                        if (double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
                             Parser.changeLocale) < 0) throw new ArgumentException();
+                        else
+                            this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
+                            Parser.changeLocale);
                     }
                 }
             }
@@ -173,7 +180,8 @@ namespace Overwatch_WinForm
                 " в разумных границах в виде X-Y, " +
                 "либо введите минимальное желаемое значение этого параметра.\n\n" +
                 "Для выбора персонажа:\n\n Двойной клик по номеру " +
-                "в заголовке строки.");
+                "в заголовке строки.\nЕсли Вы вдруг изменили значение в какой-то ячейке персонажа, но перед этим выбрали этого персонажа, " +
+                "то не забудьте перевыбрать этого персонажа, чтобы обновить его параметры.");
         }
 
         /// <summary>
@@ -376,6 +384,19 @@ namespace Overwatch_WinForm
             catch (Exception)
             {
                 MessageBox.Show("Что-то пошло не так!");
+            }
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            if (File.Exists("../../../saves/autosave.xml"))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Извините, но у Вас нет последнего сохранения :(\n\n" +
+                    "Скорее всего Вы еще не начинали игру или удалили файл XML");
             }
         }
     }

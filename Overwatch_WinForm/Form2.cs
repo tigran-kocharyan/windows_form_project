@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using ClassLibrary;
 
 namespace Overwatch_WinForm
@@ -42,7 +43,10 @@ namespace Overwatch_WinForm
             this.enemy = enemy;
 
             InitializeComponent();
-            this.Icon = new Icon("../../../img/battle.ico");
+
+            // Проверяется существование файла, чтобы избежать Exception.
+            if (File.Exists("../../../img/battle.ico"))
+                this.Icon = new Icon("../../../img/battle.ico");
 
             button3.Visible = false;
 

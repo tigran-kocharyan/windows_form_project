@@ -32,6 +32,9 @@ namespace ClassLibrary
         {
             string documentation = $"<?xml version=\"1.0\" encoding=\"utf - 8\" ?>";
 
+            // Можно заметить, что если в поле хранится значение со знаком "<" или ">"
+            // То программа обработает это как "&lt;" и "&gt;" соответственно
+            // Во избежании ошибок при чтении.
             string heroInfo =
                 "<Hero>" +
                 $"<Name>{hero.Name.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Name>" +
@@ -42,6 +45,9 @@ namespace ClassLibrary
                 $"<Reload>{hero.Reload.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Reload>" +
                 $"</Hero>";
 
+            // Здест так же можно заметить, что если в поле хранится значение со знаком "<" или ">"
+            // То программа обработает это как "&lt;" и "&gt;" соответственно
+            // Во избежании ошибок при чтении.
             string EnemyInfo =
                 "<Enemy>" +
                 $"<Name>{enemy.Name.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Name>" +
@@ -52,6 +58,7 @@ namespace ClassLibrary
                 $"<Reload>{enemy.Reload.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Reload>" +
                 $"</Enemy>";
 
+            // Информация соединяется и записывается в xml документ для последующего чтения.
             string info = documentation + heroInfo + EnemyInfo;
             File.WriteAllText("../../../saves/autosave.xml", info);
         }
