@@ -283,7 +283,5 @@ namespace Overwatch_WinForm
             SaveXML.WriteXML(hero, enemy);
             button1.Focus();
         }
-
-
     }
 }
