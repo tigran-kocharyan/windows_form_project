@@ -391,7 +391,19 @@ namespace Overwatch_WinForm
         {
             if (File.Exists("../../../saves/autosave.xml"))
             {
+                try
+                {
+                    Unit[] units = SaveXML.ReadXML();
 
+                    new Form2(this, units[0], units[1]).Show();
+                    this.Hide();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Что-то пошло не так при чтении Вашего сохранения! " +
+                        "Скорее всего, Вы его повредили.");
+                    button5.Visible = false;
+                }
             }
             else
             {

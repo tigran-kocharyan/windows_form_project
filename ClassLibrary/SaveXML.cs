@@ -18,6 +18,20 @@ namespace ClassLibrary
         {
             Unit[] units = new Unit[2];
 
+            XmlDocument xml = new XmlDocument();
+            xml.Load("../../../saves/autosave.xml");
+
+            var hero = xml["Hero"];
+
+            units[0] = new Unit(hero["Name"].InnerText.ToString(), double.Parse(hero["DPS"].InnerText),
+                double.Parse(hero["HDPS"].InnerText), double.Parse(hero["Life"].InnerText),
+                double.Parse(hero["SingleDPS"].InnerText), double.Parse(hero["Reload"].InnerText));
+
+            var enemy = xml["Enemy"];
+            units[0] = new Unit(enemy["Name"].InnerText.ToString(), double.Parse(enemy["DPS"].InnerText),
+                double.Parse(enemy["HDPS"].InnerText), double.Parse(enemy["Life"].InnerText),
+                double.Parse(enemy["SingleDPS"].InnerText), double.Parse(enemy["Reload"].InnerText));
+
             return units;
         }
 

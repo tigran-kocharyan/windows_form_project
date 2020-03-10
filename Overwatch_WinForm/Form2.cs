@@ -53,6 +53,44 @@ namespace Overwatch_WinForm
             RefreshHeroInfo();
 
             RefreshEnemyInfo();
+
+            CheckDeath(hero.Life, enemy.Life);
+        }
+
+        /// <summary>
+        /// Так как у нас три кнопки, то каждый раз прописывать состояние каждой из них такое себе удовольствие
+        /// Поэтому украсим немного код и упростим себе жизнь.
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="third"></param>
+        public void ChangeVisibility(bool first, bool second, bool third)
+        {
+            button1.Visible = first;
+            button2.Visible = second;
+            button3.Visible = third;
+        }
+
+        public void CheckDeath(double heroLife, double enemyLife)
+        {
+            if (heroLife <= 0)
+            {
+                MessageBox.Show($"К сожалению, {enemy.Name} нанес Вашему персонажу {hero.Name} " +
+                    $"сокрушительное поражение.\n" +
+                    $"Повезет в следующий раз!");
+
+                SaveXML.WriteXML(hero, enemy);
+                this.Close();
+            }
+            else if (enemyLife <= 0)
+            {
+                MessageBox.Show($"Поздравляем! Ваш персонаж {hero.Name} победил противника " +
+                    $"{enemy.Name}.\n" +
+                    $"Восстанию машин, которые побеждают наш интеллект и тактику, не бывать!");
+
+                SaveXML.WriteXML(hero, enemy);
+                this.Close();
+            }
         }
 
         /// <summary>
@@ -111,9 +149,7 @@ namespace Overwatch_WinForm
         /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
-            button1.Visible = false;
-            button2.Visible = false;
-            button3.Visible = true;
+            ChangeVisibility(false, false, true);
 
             int bullets = 5;
             int onTarget = 0;
@@ -136,14 +172,8 @@ namespace Overwatch_WinForm
 
             RefreshEnemyInfo();
 
-            if (enemy.Life <= 0)
-            {
-                MessageBox.Show($"Поздравляем! Ваш персонаж {hero.Name} победил противника " +
-                    $"{enemy.Name}.\n" +
-                    $"Восстанию машин, которые побеждают наш интеллект и тактику, не бывать!");
+            CheckDeath(hero.Life, enemy.Life);
 
-                this.Close();
-            }
             SaveXML.WriteXML(hero, enemy);
             button3.Focus();
         }
@@ -155,9 +185,7 @@ namespace Overwatch_WinForm
         /// <param name="e"></param>
         private void Button2_Click(object sender, EventArgs e)
         {
-            button1.Visible = false;
-            button2.Visible = false;
-            button3.Visible = true;
+            ChangeVisibility(false, false, true);
 
             int onTarget = 0, onHead = 0, bullets = 3;
             double damage = 0;
@@ -190,14 +218,7 @@ namespace Overwatch_WinForm
 
             RefreshEnemyInfo();
 
-            if (enemy.Life <= 0)
-            {
-                MessageBox.Show($"Поздравляем! Ваш персонаж {hero.Name} победил противника " +
-                    $"{enemy.Name}.\n" +
-                    $"Восстанию машин, которые побеждают наш интеллект и тактику, не бывать!");
-
-                this.Close();
-            }
+            CheckDeath(hero.Life, enemy.Life);
 
             SaveXML.WriteXML(hero, enemy);
             button3.Focus();
@@ -211,9 +232,7 @@ namespace Overwatch_WinForm
         /// <param name="e"></param>
         private void Button3_Click(object sender, EventArgs e)
         {
-            button1.Visible = true;
-            button2.Visible = true;
-            button3.Visible = false;
+            ChangeVisibility(true, true, false);
 
             double chance = random.NextDouble();
             int bullets, onTarget = 0, onHead = 0;
@@ -271,14 +290,7 @@ namespace Overwatch_WinForm
 
             RefreshHeroInfo();
 
-            if (hero.Life <= 0)
-            {
-                MessageBox.Show($"К сожалению, {enemy.Name} нанес Вашему персонажу {hero.Name} " +
-                    $"сокрушительное поражение.\n" +
-                    $"Повезет в следующий раз!");
-
-                this.Close();
-            }
+            CheckDeath(hero.Life, enemy.Life);
 
             SaveXML.WriteXML(hero, enemy);
             button1.Focus();
