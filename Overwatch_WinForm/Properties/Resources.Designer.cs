@@ -133,6 +133,16 @@ namespace Overwatch_WinForm.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap battlefield_changed2 {
+            get {
+                object obj = ResourceManager.GetObject("battlefield_changed2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap battleground {
             get {
                 object obj = ResourceManager.GetObject("battleground", resourceCulture);
