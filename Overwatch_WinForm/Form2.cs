@@ -136,9 +136,10 @@ namespace Overwatch_WinForm
         /// Реализация повтора решения.
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="e"></param>oldForm
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
+
             oldForm.Show();
         }
 

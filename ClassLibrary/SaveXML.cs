@@ -21,16 +21,18 @@ namespace ClassLibrary
             XmlDocument xml = new XmlDocument();
             xml.Load("../../../saves/autosave.xml");
 
-            var hero = xml["Hero"];
+            var game = xml["Game"];
+
+            var hero = game["Hero"];
 
             units[0] = new Unit(hero["Name"].InnerText.ToString(), double.Parse(hero["DPS"].InnerText),
-                double.Parse(hero["HDPS"].InnerText), double.Parse(hero["Life"].InnerText),
-                double.Parse(hero["SingleDPS"].InnerText), double.Parse(hero["Reload"].InnerText));
+                double.Parse(hero["HDPS"].InnerText), double.Parse(hero["SingleDPS"].InnerText),
+                double.Parse(hero["Life"].InnerText), double.Parse(hero["Reload"].InnerText));
 
-            var enemy = xml["Enemy"];
-            units[0] = new Unit(enemy["Name"].InnerText.ToString(), double.Parse(enemy["DPS"].InnerText),
-                double.Parse(enemy["HDPS"].InnerText), double.Parse(enemy["Life"].InnerText),
-                double.Parse(enemy["SingleDPS"].InnerText), double.Parse(enemy["Reload"].InnerText));
+            var enemy = game["Enemy"];
+            units[1] = new Unit(enemy["Name"].InnerText.ToString(), double.Parse(enemy["DPS"].InnerText),
+                double.Parse(enemy["HDPS"].InnerText), double.Parse(enemy["SingleDPS"].InnerText),
+                double.Parse(enemy["Life"].InnerText), double.Parse(enemy["Reload"].InnerText));
 
             return units;
         }
@@ -44,7 +46,7 @@ namespace ClassLibrary
         /// <param name="enemy"></param>
         public static void WriteXML(Unit hero, Unit enemy)
         {
-            string documentation = $"<?xml version=\"1.0\" encoding=\"utf - 8\" ?>";
+            string documentation = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 
             // Можно заметить, что если в поле хранится значение со знаком "<" или ">"
             // То программа обработает это как "&lt;" и "&gt;" соответственно
@@ -73,7 +75,7 @@ namespace ClassLibrary
                 $"</Enemy>";
 
             // Информация соединяется и записывается в xml документ для последующего чтения.
-            string info = documentation + heroInfo + EnemyInfo;
+            string info = documentation + "<Game>"+ heroInfo + EnemyInfo + "</Game>";
             File.WriteAllText("../../../saves/autosave.xml", info);
         }
     }

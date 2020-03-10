@@ -354,6 +354,8 @@ namespace Overwatch_WinForm
 
         /// <summary>
         /// Метод, необходимый для перехода к процессу игры с выбранным персонажем.
+        /// Так как иногда пользователь может загрузить сохранение, в котором умер, а потом начать игру, 
+        /// то сразу же в этом методе сделаем кнопку загрузки сохранения видимой.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -378,8 +380,25 @@ namespace Overwatch_WinForm
                     double.Parse(rowEnemy.Cells[2].Value.ToString()), double.Parse(rowEnemy.Cells[3].Value.ToString()),
                     double.Parse(rowEnemy.Cells[4].Value.ToString()), double.Parse(rowEnemy.Cells[5].Value.ToString()));
 
-                new Form2(this, hero, enemy).Show();
-                this.Hide();
+                button5.Visible = true;
+
+                if (double.Parse(rowEnemy.Cells[4].Value.ToString()) == 0)
+                {
+                    MessageBox.Show($"У Вашего рандомно выбранного противника  {rowEnemy.Cells[0].Value.ToString()} " +
+                        $"уже 0 жизней, навряд ли Вы хотите бить труп :(\nДадим Богу Рандома выбрать Вам соперника" +
+                        $"подстать.");;
+                }
+                else if (double.Parse(rowHero.Cells[4].Value.ToString()) == 0)
+                {
+                    MessageBox.Show($"У Вашего выбранного персонажа  {rowHero.Cells[0].Value.ToString()} " +
+                        $"уже 0 жизней, навряд ли Вы сможете сражаться этим трупом :(\n" +
+                        $"Предлагаю Вам перевыбрать чуть более живучего персонажа ;)");
+                }
+                else
+                {
+                    new Form2(this, hero, enemy).Show();
+                    this.Hide();
+                }
             }
             catch (Exception)
             {
@@ -395,8 +414,27 @@ namespace Overwatch_WinForm
                 {
                     Unit[] units = SaveXML.ReadXML();
 
-                    new Form2(this, units[0], units[1]).Show();
-                    this.Hide();
+                    if (units[0].Life <= 0)
+                    {
+                        MessageBox.Show($"К сожалению, {units[1].Name} нанес Вашему персонажу {units[0].Name} " +
+                            $"сокрушительное поражение в этом сохранении и оно не может быть использовано.\n" +
+                            $"Поэтому, лучше начните Новую Игру, чтобы соперник не пинал Вашего мертвого" +
+                            $"персонажа :)");
+                        button5.Visible = false;
+                    }
+                    else if (units[1].Life <= 0)
+                    {
+                        MessageBox.Show($"Поздравляем! Ваш персонаж {units[0].Name} победил противника " +
+                            $"{units[1].Name} в этом сохранении  и оно не может быть использовано.\n" +
+                            $"Поэтому, лучше начните Новую Игру, чтобы не добивать мертвого соперника :)");
+                        button5.Visible = false;
+                    }
+                    else
+                    {
+                        new Form2(this, units[0], units[1]).Show();
+                        this.Hide();
+                    }
+
                 }
                 catch (Exception)
                 {
