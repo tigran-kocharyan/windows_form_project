@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?><Game><Hero><Name>Melee</Name><DPS>30</DPS><HDPS>0</HDPS><Life>∞</Life><SingleDPS>30</SingleDPS><Reload>0</Reload></Hero><Enemy><Name>Torbjorn Hammer</Name><DPS>75</DPS><HDPS>0</HDPS><Life>-10</Life><SingleDPS>75</SingleDPS><Reload>0</Reload></Enemy></Game>
