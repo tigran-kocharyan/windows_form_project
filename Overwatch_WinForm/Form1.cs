@@ -89,12 +89,14 @@ namespace Overwatch_WinForm
         private void Change()
         {
             button1.Text = "Сбросить Фильтр";
-            MessageBox.Show($"Здравствуй, Игрок! Вот, что тебе нужно сделать:\n\n" +
+            MessageBox.Show($"Здравствуй, Игрок! Сначала попрошу тебя проверять эту работу так, как бы ты хотел," +
+                $"чтобы проверили твою работу <3. Вот, что тебе нужно сделать перед началом игры:\n\n" +
                 $"В появившейся таблице кликни по номеру строки слева, чтобы получить информацию о выбранном." +
                 $"\n\n{new String('-', 92)}\nПамятка по работе фильтра:\n\n" +
-                "Ты можешь фильтровать по нескольким параметрам одновременно, но не забывай тогда обновлять таблицу кнопкой " +
-                "'Сбросить Фильтр'.\n\nНе советую шутить с этой игрушкой дьявола...");
-            Button2_Click(null, null);
+                "Ты можешь фильтровать по нескольким параметрам одновременно, " +
+                "но не забывай тогда обновлять таблицу кнопкой " +
+                "'Сбросить Фильтр'.\n\nНе советую шутить с этой игрушкой дьявола...\n\nЕсли что-то всё еще не понятно" +
+                ", то советую обратиться к подсказке в левом нижнем углу.");
         }
 
         /// <summary>
@@ -333,49 +335,6 @@ namespace Overwatch_WinForm
                 textBox3.Text = "";
             }
         }
-
-        /// <summary>
-        /// Выводит информацию о персонаже в Label_4.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            var row = this.dataGridView1.Rows[e.RowIndex];
-            rowIndex = e.RowIndex;
-
-            // Проверка, чтобы избежать выбора персонажа с неправильным полем.
-            for (int i = 1; i < 5; i++)
-            {
-                try
-                {
-                    double.Parse(row.Cells[i].Value.ToString());
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Возможно, Вам удалось изменить значение в ячейку на невалидное и Вы решили" +
-                        "выбрать этого персонажа. Все поля, кроме валидных, будут иметь теперь значение 0.");
-                    row.Cells[i].Value = "0";
-                }
-            }
-            label4.Text = $"Вы выбрали персонажа:\n\n{row.Cells[0].Value.ToString()}\n" +
-                $"DPS: {row.Cells[1].Value.ToString()}\n" +
-                $"Headshot DPS: {row.Cells[2].Value.ToString()}\n" +
-                $"Single Shot DPS: {row.Cells[3].Value.ToString()}\n" +
-                $"Life: {row.Cells[4].Value.ToString()}\n" +
-                $"Reload: {row.Cells[5].Value.ToString()}";
-        }
-
-        /// <summary>
-        /// Событие, которое показывает кнопку начала игры, как только игрок выбрал персонажа.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Label4_TextChanged(object sender, EventArgs e)
-        {
-            button4.Visible = true;
-        }
-
         /// <summary>
         /// Метод, необходимый для перехода к процессу игры с выбранным персонажем.
         /// Так как иногда пользователь может загрузить сохранение, в котором умер, а потом начать игру, 
@@ -393,7 +352,6 @@ namespace Overwatch_WinForm
                 Unit hero = new Unit(rowHero.Cells[0].Value.ToString(), double.Parse(rowHero.Cells[1].Value.ToString()),
                     double.Parse(rowHero.Cells[2].Value.ToString()), double.Parse(rowHero.Cells[3].Value.ToString()),
                     double.Parse(rowHero.Cells[4].Value.ToString()), double.Parse(rowHero.Cells[5].Value.ToString()));
-
                 do
                 {
                     randomIndex = random.Next(0, 58);
@@ -425,7 +383,7 @@ namespace Overwatch_WinForm
                 {
                     MessageBox.Show($"У Вашего рандомно выбранного противника  {rowEnemy.Cells[0].Value.ToString()} " +
                         $"уже 0 жизней, навряд ли Вы хотите бить труп :(\nДадим Богу Рандома выбрать Вам соперника" +
-                        $"подстать.");;
+                        $"подстать."); ;
                 }
                 else if (double.Parse(rowHero.Cells[4].Value.ToString()) == 0)
                 {
@@ -454,10 +412,17 @@ namespace Overwatch_WinForm
             }
         }
 
+        /// <summary>
+        /// Метод для считывания файла с сохранением игры.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button5_Click(object sender, EventArgs e)
         {
+            // Проверка на существование файла.
             if (File.Exists("../../../saves/autosave.xml"))
             {
+                // Проверка на корректность данных в файле XML.
                 try
                 {
                     Unit[] units = SaveXML.ReadXML();
@@ -477,7 +442,7 @@ namespace Overwatch_WinForm
                             $"Поэтому, лучше начните Новую Игру, чтобы не добивать мертвого соперника :)");
                         button5.Visible = false;
                     }
-                    else if(units[1].Life == double.PositiveInfinity && units[1].Life == double.PositiveInfinity)
+                    else if (units[1].Life == double.PositiveInfinity && units[1].Life == double.PositiveInfinity)
                     {
                         MessageBox.Show($"Вау! Вы изменили значения в CSV-файле или в XML и теперь Ваш персонаж" +
                             $" {units[0].Name} и персонаж Вашего противника " +
@@ -491,7 +456,6 @@ namespace Overwatch_WinForm
                         new Form2(this, units[0], units[1]).Show();
                         this.Hide();
                     }
-
                 }
                 catch (Exception)
                 {
@@ -506,6 +470,48 @@ namespace Overwatch_WinForm
                 MessageBox.Show("Извините, но у Вас нет последнего сохранения :(\n\n" +
                     "Скорее всего Вы еще не начинали игру или удалили файл XML");
             }
+        }
+
+        /// <summary>
+        /// Выводит информацию о персонаже в Label_4.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var row = this.dataGridView1.Rows[e.RowIndex];
+            rowIndex = e.RowIndex;
+
+            // Проверка, чтобы избежать выбора персонажа с неправильным полем.
+            for (int i = 1; i < 5; i++)
+            {
+                try
+                {
+                    double.Parse(row.Cells[i].Value.ToString());
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Возможно, Вам удалось изменить значение в ячейке на невалидное и Вы решили" +
+                        "выбрать этого персонажа. Все поля, кроме валидных, будут иметь теперь значение 0.");
+                    row.Cells[i].Value = "0";
+                }
+            }
+            label4.Text = $"Вы выбрали персонажа:\n\n{row.Cells[0].Value.ToString()}\n" +
+                $"DPS: {row.Cells[1].Value.ToString()}\n" +
+                $"Headshot DPS: {row.Cells[2].Value.ToString()}\n" +
+                $"Single Shot DPS: {row.Cells[3].Value.ToString()}\n" +
+                $"Life: {row.Cells[4].Value.ToString()}\n" +
+                $"Reload: {row.Cells[5].Value.ToString()}";
+        }
+
+        /// <summary>
+        /// Событие, которое показывает кнопку начала игры, как только игрок выбрал персонажа.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Label4_TextChanged(object sender, EventArgs e)
+        {
+            button4.Visible = true;
         }
     }
 }

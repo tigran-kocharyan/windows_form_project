@@ -48,12 +48,13 @@ namespace Overwatch_WinForm
             if (File.Exists("../../../img/battle.ico"))
                 this.Icon = new Icon("../../../img/battle.ico");
 
+            // Кнопка атаки противника скрыта.
             button3.Visible = false;
-
+            // Обновляем значение жизней после сражения или загрузки в форму.
             RefreshHeroInfo();
-
             RefreshEnemyInfo();
 
+            // Проверяем значение полей Life.
             CheckDeath(hero.Life, enemy.Life);
         }
 
@@ -71,6 +72,12 @@ namespace Overwatch_WinForm
             button3.Visible = third;
         }
 
+        /// <summary>
+        /// Метод для проверки на смерть персонажа 
+        /// пользователя или его противника.
+        /// </summary>
+        /// <param name="heroLife"></param>
+        /// <param name="enemyLife"></param>
         public void CheckDeath(double heroLife, double enemyLife)
         {
             if (heroLife <= 0)
@@ -170,10 +177,11 @@ namespace Overwatch_WinForm
             label3.Text = $"Персонаж {hero.Name} нанес {damage} противнику {enemy.Name} урона," +
                 $" попав {onTarget} раз(a).";
 
+            // Проверяем значение полей и обновляем их после нанесения урона.
             RefreshEnemyInfo();
-
             CheckDeath(hero.Life, enemy.Life);
 
+            // Сохраняем значение полей в XML и фокусируем кнопку атаки противника.
             SaveXML.WriteXML(hero, enemy);
             button3.Focus();
         }
@@ -216,10 +224,11 @@ namespace Overwatch_WinForm
                 $"{damage} урона противнику " +
                 $"{enemy.Name}, попав {onTarget} раз(a) и из них {onHead} в голову.";
 
+            // Проверяем значение полей и обновляем их после нанесения урона.
             RefreshEnemyInfo();
-
             CheckDeath(hero.Life, enemy.Life);
 
+            // Сохраняем значение полей в XML и фокусируем кнопку атаки противника.
             SaveXML.WriteXML(hero, enemy);
             button3.Focus();
         }
@@ -288,10 +297,11 @@ namespace Overwatch_WinForm
                     $"попав {onTarget} раз(a).";
             }
 
+            // Проверяем значение полей и обновляем их после нанесения урона.
             RefreshHeroInfo();
-
             CheckDeath(hero.Life, enemy.Life);
 
+            // Сохраняем значение полей в XML и фокусируем кнопку атаки персонажа пользователя.
             SaveXML.WriteXML(hero, enemy);
             button1.Focus();
         }

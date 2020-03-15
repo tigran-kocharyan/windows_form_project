@@ -8,6 +8,9 @@ using System.Xml;
 
 namespace ClassLibrary
 {
+    /// <summary>
+    /// Класс для считывания и записи в XML-файл.
+    /// </summary>
     public class SaveXML
     {
         /// <summary>
@@ -24,6 +27,8 @@ namespace ClassLibrary
             var game = xml["Game"];
 
             var hero = game["Hero"];
+
+            // Обычное чтение значений из XML-файла через взятие значений из ячеек Node-ов.
 
             units[0] = new Unit(hero["Name"].InnerText.ToString(), double.Parse(hero["DPS"].InnerText),
                 double.Parse(hero["HDPS"].InnerText), double.Parse(hero["SingleDPS"].InnerText),
@@ -61,7 +66,7 @@ namespace ClassLibrary
                 $"<Reload>{hero.Reload.ToString().Replace("<", "&lt;").Replace(">", "&gt;")}</Reload>" +
                 $"</Hero>";
 
-            // Здест так же можно заметить, что если в поле хранится значение со знаком "<" или ">"
+            // Здесь так же можно заметить, что если в поле хранится значение со знаком "<" или ">"
             // То программа обработает это как "&lt;" и "&gt;" соответственно
             // Во избежании ошибок при чтении.
             string EnemyInfo =

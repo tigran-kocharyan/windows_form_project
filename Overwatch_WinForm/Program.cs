@@ -15,6 +15,7 @@ namespace Overwatch_WinForm
         [STAThread]
         static void Main()
         {
+            // Во избежание непредвиденных ошибок, ловим их так же в Main().
             try
             {
                 Application.EnableVisualStyles();
