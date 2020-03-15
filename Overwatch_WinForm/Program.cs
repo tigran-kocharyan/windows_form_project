@@ -15,9 +15,18 @@ namespace Overwatch_WinForm
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1());
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Вы что-то натворили :(\nПросим Вас оценивать работу без попыток через " +
+                    "изменение файлов сломать программу.");
+            }
         }
     }
 }

@@ -343,6 +343,21 @@ namespace Overwatch_WinForm
         {
             var row = this.dataGridView1.Rows[e.RowIndex];
             rowIndex = e.RowIndex;
+
+            // Проверка, чтобы избежать выбора персонажа с неправильным полем.
+            for (int i = 1; i < 5; i++)
+            {
+                try
+                {
+                    double.Parse(row.Cells[i].Value.ToString());
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Возможно, Вам удалось изменить значение в ячейку на невалидное и Вы решили" +
+                        "выбрать этого персонажа. Все поля, кроме валидных, будут иметь теперь значение 0.");
+                    row.Cells[i].Value = "0";
+                }
+            }
             label4.Text = $"Вы выбрали персонажа:\n\n{row.Cells[0].Value.ToString()}\n" +
                 $"DPS: {row.Cells[1].Value.ToString()}\n" +
                 $"Headshot DPS: {row.Cells[2].Value.ToString()}\n" +
@@ -390,6 +405,21 @@ namespace Overwatch_WinForm
                     double.Parse(rowEnemy.Cells[4].Value.ToString()), double.Parse(rowEnemy.Cells[5].Value.ToString()));
 
                 button5.Visible = true;
+
+                // Проверка, чтобы избежать выбора персонажа с неправильным полем.
+                for (int i = 1; i < 5; i++)
+                {
+                    try
+                    {
+                        double.Parse(rowEnemy.Cells[i].Value.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Возможно, Вам удалось изменить значение в ячейку на невалидное и Вы решили" +
+                            "выбрать этого персонажа. Все поля, кроме валидных, будут иметь теперь значение 0.");
+                        rowEnemy.Cells[i].Value = "0";
+                    }
+                }
 
                 if (double.Parse(rowEnemy.Cells[4].Value.ToString()) == 0)
                 {
