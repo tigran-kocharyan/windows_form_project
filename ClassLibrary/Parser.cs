@@ -27,7 +27,10 @@ namespace ClassLibrary
         {
             try
             {
+                // Использование предикатной фильтрации.
                 string[] csvText = File.ReadAllLines(path).Where(e => e.Trim() != "").ToArray();
+                if (csvText == null)
+                    throw new ArgumentException();
                 string[][] answer = new string[csvText.Length][];
                 for (int i = 0; i < csvText.Length; i++)
                 {

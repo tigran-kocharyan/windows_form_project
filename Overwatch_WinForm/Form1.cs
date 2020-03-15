@@ -23,7 +23,7 @@ namespace Overwatch_WinForm
             // Проверяется существование файла, чтобы избежать Exception.
             if (File.Exists("../../../img/logo.ico"))
                 this.Icon = new Icon("../../../img/logo.ico");
-
+            // Скрываем от пользователя все кнопки и тексты.
             MakeInvisible();
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
         }
@@ -89,12 +89,12 @@ namespace Overwatch_WinForm
         private void Change()
         {
             button1.Text = "Сбросить Фильтр";
-            /*MessageBox.Show($"Здравствуй, Игрок! Вот, что тебе нужно сделать:\n\n" +
+            MessageBox.Show($"Здравствуй, Игрок! Вот, что тебе нужно сделать:\n\n" +
                 $"В появившейся таблице кликни по номеру строки слева, чтобы получить информацию о выбранном." +
                 $"\n\n{new String('-', 92)}\nПамятка по работе фильтра:\n\n" +
                 "Ты можешь фильтровать по нескольким параметрам одновременно, но не забывай тогда обновлять таблицу кнопкой " +
-                "'Обновить'.\n\nНе советую шутить с этой игрушкой дьявола...");
-            Button2_Click(null, null);*/
+                "'Сбросить Фильтр'.\n\nНе советую шутить с этой игрушкой дьявола...");
+            Button2_Click(null, null);
         }
 
         /// <summary>
@@ -117,20 +117,19 @@ namespace Overwatch_WinForm
                     }
                     else
                     {
-                        if (double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
-                            Parser.changeLocale) < 0) throw new ArgumentException();
+                        if (double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()) < 0) throw new ArgumentException();
                         else
-                            this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
-                            Parser.changeLocale);
+                            this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = double.Parse(this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()).ToString();
                     }
                 }
             }
             catch (Exception)
             {
                 this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "0";
-                MessageBox.Show("Вы ввели недопустимое значение в ячейку с числом! " +
+                MessageBox.Show("Вы ввели недопустимое значение в ячейку с числом " +
+                    "или использовали недопустимую локаль! Советуем использовать ',' вместо '.' в double." +
                     "Теперь там будет стоять 0! Вводите, пожалуйста, либо int, либо double.\n" +
-                    "Не думаю, что персонаж умеет стрелять строками :)");
+                    "Не думаю, что персонаж умеет стрелять строками :)", caption : "Ошибка ввода значений в ячейку.");
             }
         }
 
@@ -141,32 +140,42 @@ namespace Overwatch_WinForm
         /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
-
-            if (button1.Text == "Считать CSV")
+            try
             {
-                Change();
-                MakeVisible();
-                string[][] stats = Parser.ReadCSV("../../Overwatch.csv");
-                for (int i = 0; i < stats[0].Length; i++)
+                if (button1.Text == "Считать CSV")
                 {
-                    this.dataGridView1.Columns.Add(stats[0][i], stats[0][i]);
+                    Change();
+                    MakeVisible();
+                    string[][] stats = Parser.ReadCSV("../../Overwatch.csv");
+                    for (int i = 0; i < stats[0].Length; i++)
+                    {
+                        this.dataGridView1.Columns.Add(stats[0][i], stats[0][i]);
+                    }
+                    for (int i = 1; i < stats.Length; i++)
+                    {
+                        this.dataGridView1.Rows.Add(stats[i]);
+                    }
+                    for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
+                    {
+                        this.dataGridView1.Rows[i].HeaderCell.Value = $"{i + 1}";
+                    }
                 }
-                for (int i = 1; i < stats.Length; i++)
+                else
                 {
-                    this.dataGridView1.Rows.Add(stats[i]);
-                }
-                for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
-                {
-                    this.dataGridView1.Rows[i].HeaderCell.Value = $"{i + 1}";
+                    textBox1.Text = String.Empty;
+                    textBox2.Text = String.Empty;
+                    textBox3.Text = String.Empty;
+                    Renew();
                 }
             }
-            else
+            catch (Exception)
             {
-                textBox1.Text = String.Empty;
-                textBox2.Text = String.Empty;
-                textBox3.Text = String.Empty;
-                Renew();
+                MessageBox.Show("Произошла ошибка при чтении CSV-файла. Возможно, Вы совершили критичную ошибку" +
+                    ", изменив что-то там, либо просто удалили всю информацию из файла. Так как теперь будет невозможно" +
+                    "выбрать персонажей, советуем Вам вернуть все на место и запустить игру снова :)");
+                this.Close();
             }
+            
         }
 
         /// <summary>
