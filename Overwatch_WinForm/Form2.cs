@@ -76,7 +76,7 @@ namespace Overwatch_WinForm
             if (heroLife <= 0)
             {
                 MessageBox.Show($"К сожалению, {enemy.Name} нанес Вашему персонажу {hero.Name} " +
-                    $"сокрушительное поражение.\n" +
+                    $"сокрушительное удар. Вы проиграли :(\n" +
                     $"Повезет в следующий раз!");
 
                 SaveXML.WriteXML(hero, enemy);
@@ -139,7 +139,6 @@ namespace Overwatch_WinForm
         /// <param name="e"></param>oldForm
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-
             oldForm.Show();
         }
 

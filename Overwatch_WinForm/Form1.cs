@@ -403,6 +403,15 @@ namespace Overwatch_WinForm
                         $"уже 0 жизней, навряд ли Вы сможете сражаться этим трупом :(\n" +
                         $"Предлагаю Вам перевыбрать чуть более живучего персонажа ;)");
                 }
+                else if (double.Parse(rowHero.Cells[4].Value.ToString()) == double.PositiveInfinity
+                    && double.Parse(rowEnemy.Cells[4].Value.ToString()) == double.PositiveInfinity)
+                {
+                    MessageBox.Show($"Вау! Вы изменили значения в CSV-файле или в XML и теперь Ваш персонаж" +
+                        $" {rowHero.Cells[0].Value.ToString()} и персонаж Вашего противника " +
+                        $"{rowEnemy.Cells[0].Value.ToString()} имеют бесконечное количество жизней.\n" +
+                        $"Очевидно, что игра так же будет бесконечной, поэтому присуждаю Вам честную ничью, " +
+                        $"чтобы не мучить, в ожидании завершения сражения :)");
+                }
                 else
                 {
                     new Form2(this, hero, enemy).Show();
@@ -438,6 +447,15 @@ namespace Overwatch_WinForm
                             $"Поэтому, лучше начните Новую Игру, чтобы не добивать мертвого соперника :)");
                         button5.Visible = false;
                     }
+                    else if(units[1].Life == double.PositiveInfinity && units[1].Life == double.PositiveInfinity)
+                    {
+                        MessageBox.Show($"Вау! Вы изменили значения в CSV-файле или в XML и теперь Ваш персонаж" +
+                            $" {units[0].Name} и персонаж Вашего противника " +
+                            $"{units[1].Name} имеют бесконечное количество жизней.\n" +
+                            $"Очевидно, что игра так же будет бесконечной, поэтому присуждаю Вам честную ничью, " +
+                            $"чтобы не мучить, в ожидании завершения сражения :)");
+                        button5.Visible = false;
+                    }
                     else
                     {
                         new Form2(this, units[0], units[1]).Show();
@@ -448,7 +466,8 @@ namespace Overwatch_WinForm
                 catch (Exception)
                 {
                     MessageBox.Show("Что-то пошло не так при чтении Вашего сохранения! " +
-                        "Скорее всего, Вы его повредили.");
+                        "Скорее всего, Вы его повредили. Советуем начать Новую Игру и не исправлять файл с " +
+                        "сохранениями, чтобы потом прочитать его :)");
                     button5.Visible = false;
                 }
             }
